@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 
-export default function App() {
-  const [state, changeState] = useState('This text will change!')
+function App() {
+  const [state, changeState] = useState({
+    carrier: ""
+  })
+
+  useEffect(() => {
+    NetInfo.fetch().then(info => {
+      changeState({carrier: info.details.carrier})
+    })
+  })
 
   return (
     <View style={styles.container}>
-      <Text>{state}</Text>
-      <Button title="Click Me!" onPress= {() => changeState('Text Changed!') }/>
+      <Text style={styles.textStyle}>Your carrier is: {state.carrier}</Text>
     </View>
   );
 }
@@ -19,4 +27,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textStyle: {
+    fontSize: 20,
+  }
 });
+
+export default App
