@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import Navbar from "./components/Navbar";
 import * as Permissions from 'expo-permissions';
@@ -42,7 +42,7 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Navbar styles={styles.navbar}/>
+      <Navbar />
       <Text>Latitude: {latitude}</Text>
       <Text>Longitude: {longitude}</Text>
       <Text>Carrier: {carrier}</Text>
@@ -61,18 +61,12 @@ function App() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: '1%',
     paddingLeft: 20,
     paddingRight: 20,
   },
-  navbar: {
-    width: '100%',
-    paddingTop: '5%',
-    marginBottom: '5%',
-  },
   map: {
     width: '100%',
-    height: '80%',
+    height: '75%',
   }
 });
 
