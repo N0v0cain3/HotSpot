@@ -7,8 +7,6 @@ var dataSchema=new mongoose.Schema({
   ip:String,
   down:Number,
   up:Number
-  
-
 });
 
 module.exports=mongoose.model("Data",dataSchema);

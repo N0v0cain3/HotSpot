@@ -21,22 +21,15 @@ app.get("/",function(req,res){
 
 
 app.post("/post",function(req,res){
-    var ping=req.params.ping;
-    var lat=req.params.lattitdue;
-    var lon=req.params.longitude;
-    var isp=req.params.isp;
-    var down=req.params.down;
-    var up=req.params.up;
-    var newData={ping:ping,lattitdue:lat,longitude:lon,isp:isp,down:down,up:up};
+    var ping=req.query.ping;
+    var lat=req.query.lattitdue;
+    var lon=req.query.longitude;
+    var isp=req.query.isp;
+    var down=req.query.down;
+    var up=req.query.up;
+    var newData={ping:ping,lattitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    var data= new Data({
-        ping,
-        lat,
-        lon,
-        isp,
-        down,
-        up,
-    });
+    var data= new Data({newData});
     data.save();
 
     Data.create(newData,function(err,newlyCreated){
@@ -46,7 +39,7 @@ app.post("/post",function(req,res){
         }
        else
        {
-           res.redirect("/");
+           res.send(newData);
        }
     })
 });
