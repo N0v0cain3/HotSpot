@@ -13,5 +13,5 @@ const connectDB=async()=>{
             process.exit(1);
         }
     }
-
+//connecting online
 module.exports=connectDB;
