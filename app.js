@@ -15,22 +15,23 @@ var Data=require('./models/data');
 // lattitude: String,
 // longitude:String,
 // isp:String,
-app.get("/",function(req,res){
+app.get("/:id",function(req,res){
+
     console.log("get");
 })
 
 
 app.post("/post",function(req,res){
     var ping=req.query.ping;
-    var lat=req.query.lattitdue;
+    var lat=req.query.latitude;
     var lon=req.query.longitude;
     var isp=req.query.isp;
     var down=req.query.down;
     var up=req.query.up;
-    var newData={ping:ping,lattitude:lat,longitude:lon,isp:isp,down:down,up:up};
+    var newData={ping:ping,latitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    var data= new Data({newData});
-    data.save();
+    // var data= new Data({newData});
+    // data.save();
 
     Data.create(newData,function(err,newlyCreated){
         if(err)

@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 var dataSchema=new mongoose.Schema({
   ping: Number,
-  lattitude: String,
+  latitude:String,
   longitude:String,
   isp:String,
   ip:String,
