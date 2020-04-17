@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+var PORT=process.env.PORT||3000;
 const mongoose=require('mongoose');
  mongoose.connect("mongodb://localhost/HotSpot");
 const bodyParser=require('body-parser');
@@ -45,6 +46,6 @@ app.post("/post",function(req,res){
     })
 });
 
-app.listen(3000,function(err){
+app.listen(PORT,function(err){
     console.log("server is running!");
 });
