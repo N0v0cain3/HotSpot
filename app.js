@@ -1,8 +1,8 @@
 const express=require('express');
 const app=express();
-var PORT=process.env.PORT||3000;
 const mongoose=require('mongoose');
-//  mongoose.connect("mongodb://localhost/HotSpot");
+var PORT=process.env.PORT||3000;
+ mongoose.connect("mongodb://localhost/HotSpot");
 const bodyParser=require('body-parser');
 const connectDB=require('./config/db');
 connectDB(); 
@@ -31,8 +31,8 @@ app.post("/post",function(req,res){
     var up=req.query.up;
     var newData={ping:ping,latitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    // var data= new Data({newData});
-    // data.save();
+    var data= new Data({newData});
+    data.save();
 
     Data.create(newData,function(err,newlyCreated){
         if(err)
