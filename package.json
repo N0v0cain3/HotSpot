@@ -4,6 +4,7 @@
   "description": "Find best areas to go to with respect to mobile network strength.",
   "main": "app.js",
   "scripts": {
+    "start":"app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
