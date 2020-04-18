@@ -1,23 +1,40 @@
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
- mongoose.connect("mongodb://localhost/HotSpot");
+var PORT=process.env.PORT||3000;
+// mongoose.connect("mongodb://localhost/HotSpot");
 const bodyParser=require('body-parser');
-// const connectDB=require('./config/db');
-// connectDB(); 
+const connectDB=require('./config/db');
+connectDB(); 
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 var Data=require('./models/data');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb+srv://Shivam:Shivammehta2001@cluster0-tnmyh.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
+
 
 
 // ping: Number,
 // lattitude: String,
 // longitude:String,
 // isp:String,
-app.get("/:id",function(req,res){
+app.get("/",function(req,res){
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("test");
+        var query = { isp: "BSNL" };
+        dbo.collection("datas").find(query).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.send(result);
+          db.close();
+        });
+      });
 
     console.log("get");
+    
 })
 
 
@@ -30,8 +47,8 @@ app.post("/post",function(req,res){
     var up=req.query.up;
     var newData={ping:ping,latitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    // var data= new Data({newData});
-    // data.save();
+    var data= new Data({newData});
+    data.save();
 
     Data.create(newData,function(err,newlyCreated){
         if(err)
@@ -45,6 +62,6 @@ app.post("/post",function(req,res){
     })
 });
 
-app.listen(3000,function(err){
+app.listen(PORT,function(err){
     console.log("server is running!");
 });
