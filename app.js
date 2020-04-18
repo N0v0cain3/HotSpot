@@ -20,11 +20,11 @@ var url = "mongodb+srv://Shivam:Shivammehta2001@cluster0-tnmyh.gcp.mongodb.net/t
 // lattitude: String,
 // longitude:String,
 // isp:String,
-app.get("/",function(req,res){
+app.get("/:id",function(req,res){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("test");
-        var query = { isp: "BSNL" };
+        var query = { isp: req.params.id };
         dbo.collection("datas").find(query).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
