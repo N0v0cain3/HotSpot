@@ -38,8 +38,8 @@ app.post("/post",function(req,res){
     var up=req.query.up;
     var newData={ping:ping,latitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    var data= new Data({newData});
-    data.save();
+//     var data= new Data({newData});
+//     data.save();
 
     Data.create(newData,function(err,newlyCreated){
         if(err)
