@@ -20,6 +20,7 @@ var url = "mongodb+srv://Shivam:Shivammehta2001@cluster0-tnmyh.gcp.mongodb.net/t
 // lattitude: String,
 // longitude:String,
 // isp:String,
+    
 app.get("/:id",function(req,res){
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
@@ -47,8 +48,21 @@ app.post("/post",function(req,res){
     var up=req.query.up;
     var newData={ping:ping,latitude:lat,longitude:lon,isp:isp,down:down,up:up};
     console.log(lat);
-    var data= new Data({newData});
-    data.save();
+    // var data= new Data({newData});
+    // data.save();
+    
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("test");
+        var myquery = { lattitude: lat,
+        longitude :lon };
+        var newvalues = { $set: {ping: ping, down:down } };
+        dbo.collection(datas).updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");
+          db.close();
+        }); 
+      });
 
     Data.create(newData,function(err,newlyCreated){
         if(err)
