@@ -57,7 +57,7 @@ app.post("/post",function(req,res){
         var myquery = { lattitude: lat,
         longitude :lon };
         var newvalues = { $set: {ping: ping, down:down } };
-        dbo.collection(datas).updateOne(myquery, newvalues, function(err, res) {
+        dbo.collection("datas").updateOne(myquery, newvalues, function(err, res) {
           if (err) throw err;
           console.log("1 document updated");
           db.close();
