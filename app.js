@@ -16,10 +16,7 @@ var url = "mongodb+srv://Shivam:Shivammehta2001@cluster0-tnmyh.gcp.mongodb.net/t
 
 
 
-// ping: Number,
-// lattitude: String,
-// longitude:String,
-// isp:String,
+
     
 app.get("/:id",function(req,res){
     MongoClient.connect(url, function(err, db) {
